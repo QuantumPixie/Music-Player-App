@@ -40,7 +40,6 @@
   transform: scale(0.95);
 }
 
-/* For favorite button specific styling */
 .button.favorite-button {
   transition: all 0.2s ease;
 }

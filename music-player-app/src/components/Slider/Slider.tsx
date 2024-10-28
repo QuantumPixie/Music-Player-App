@@ -15,7 +15,7 @@ const Slider = ({ value, onValueChange, max, step }: SliderProps) => {
     }
   };
 
-  // Ensure we always have a valid number value
+  // always have a valid number value
   const safeValue = !isNaN(value[0]) ? value[0] : 0;
 
   return (
