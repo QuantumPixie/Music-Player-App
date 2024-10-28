@@ -1,0 +1,140 @@
+.controls {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #1e2875;
+  border-top: 1px solid #2e3885;
+  padding: 1rem;
+}
+
+.controls-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+.controls-cover {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  object-fit: cover;
+  box-shadow: 0 0 10px rgba(255, 255, 255 / 10%);
+}
+
+.controls-info {
+  flex: 1;
+  text-align: left;
+}
+
+.controls-title {
+  font-weight: 600;
+  margin: 0;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.controls-artist {
+  font-size: 0.875rem;
+  color: #b4c6ff;
+  margin: 0;
+}
+
+.controls-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.controls-icon {
+  width: 20px;
+  height: 20px;
+  color: #fff;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 120px;
+}
+
+.progress-container {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background-color: #1e2875;
+  border-top: 1px solid #2e3885;
+}
+
+.progress-container .slider-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.time-display {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: #b4c6ff;
+  max-width: 1200px;
+  margin: 0.25rem auto 0;
+  padding: 0 11rem;
+}
+
+@media (width <= 768px) {
+  .controls-container {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0 0.5rem;
+  }
+
+  .controls-cover {
+    width: 40px;
+    height: 40px;
+  }
+
+  .controls-info {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .controls-title {
+    font-size: 0.875rem;
+  }
+
+  .controls-artist {
+    font-size: 0.75rem;
+  }
+
+  .controls-buttons {
+    order: 2;
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+
+  .volume-control {
+    display: none;
+  }
+
+  .progress-container {
+    padding: 0.25rem 0.5rem;
+  }
+
+  .progress-container .slider-container {
+    padding: 8px 0.5rem;
+  }
+
+  .time-display {
+    margin-left: 0;
+    padding: 0 0.5rem;
+    font-size: 0.75rem;
+  }
+}
