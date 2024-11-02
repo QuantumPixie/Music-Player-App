@@ -1,16 +1,10 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { Song, PlayerState } from "../types/music";
-import { songs } from "../data/songs";
+import { Song, PlayerState } from "@/types/music";
+import { CONFIG } from "@/constants";
 
 interface PlayerStore extends PlayerState {
-  currentSong: Song | null;
-  isPlaying: boolean;
-  volume: number;
-  progress: number;
-  favorites: string[];
-
-  setCurrentSong: (song: Song | null) => void;
+  setCurrentSong: (song: Song) => void;
   setIsPlaying: (isPlaying: boolean) => void;
   setVolume: (volume: number) => void;
   setProgress: (progress: number) => void;
@@ -20,12 +14,29 @@ interface PlayerStore extends PlayerState {
   playPreviousSong: () => void;
 }
 
+const getSongByIndex = async (currentId?: string) => {
+  try {
+    const response = await fetch("/songs.json");
+    const songs: Song[] = await response.json();
+    const currentIndex = currentId
+      ? songs.findIndex((s) => s.id === currentId)
+      : -1;
+    return (offset: number) => {
+      if (currentIndex === -1) return songs[0];
+      return songs[(currentIndex + offset + songs.length) % songs.length];
+    };
+  } catch (error) {
+    console.error("Error loading songs:", error);
+    return null;
+  }
+};
+
 export const usePlayerStore = create<PlayerStore>()(
   persist(
     (set, get) => ({
-      currentSong: null,
+      currentSong: undefined,
       isPlaying: false,
-      volume: 1,
+      volume: CONFIG.DEFAULT_VOLUME,
       progress: 0,
       favorites: [],
 
@@ -43,29 +54,38 @@ export const usePlayerStore = create<PlayerStore>()(
 
       isFavorite: (songId) => get().favorites.includes(songId),
 
-      playNextSong: () =>
-        set((state) => {
-          if (!state.currentSong) return state;
-          const currentIndex = songs.findIndex(
-            (s) => s.id === state.currentSong?.id
-          );
-          const nextSong = songs[(currentIndex + 1) % songs.length];
-          return { currentSong: nextSong, isPlaying: true };
-        }),
+      playNextSong: async () => {
+        const state = get();
+        if (!state.currentSong) return;
 
-      playPreviousSong: () =>
-        set((state) => {
-          if (!state.currentSong) return state;
-          const currentIndex = songs.findIndex(
-            (s) => s.id === state.currentSong?.id
-          );
-          const previousSong =
-            songs[(currentIndex - 1 + songs.length) % songs.length];
-          return { currentSong: previousSong, isPlaying: true };
-        }),
+        const getNext = await getSongByIndex(state.currentSong.id);
+        if (getNext) {
+          set({
+            currentSong: getNext(1),
+            isPlaying: true,
+          });
+        }
+      },
+
+      playPreviousSong: async () => {
+        const state = get();
+        if (!state.currentSong) return;
+
+        const getPrevious = await getSongByIndex(state.currentSong.id);
+        if (getPrevious) {
+          set({
+            currentSong: getPrevious(-1),
+            isPlaying: true,
+          });
+        }
+      },
     }),
     {
       name: "player-storage",
+      partialize: (state) => ({
+        favorites: state.favorites,
+        volume: state.volume,
+      }),
     }
   )
 );

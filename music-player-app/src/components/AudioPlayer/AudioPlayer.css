@@ -2,6 +2,7 @@
   min-height: 100vh;
   background-color: #162058;
   padding-bottom: 7rem;
+  color: #fff;
 }
 
 .container {
@@ -12,11 +13,27 @@
   box-sizing: border-box;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
 .title {
   font-size: 2.5rem;
   font-weight: bold;
-  margin-bottom: 2rem;
-  color: #ffff;
+  color: #fff;
+  margin: 0;
+}
+
+.help-button {
+  color: #b4c6ff;
+  transition: color 0.2s ease;
+}
+
+.help-button:hover {
+  color: #fff;
 }
 
 .search-container {
@@ -42,9 +59,10 @@
   border-radius: 0.5rem;
   border: 1px solid #2e3885;
   background: #1e2875;
-  color: #ffff;
+  color: #fff;
   font-size: 1rem;
   box-sizing: border-box;
+  transition: all 0.2s ease;
 }
 
 .search-input::placeholder {
@@ -55,14 +73,6 @@
   outline: none;
   border-color: #4169e1;
   box-shadow: 0 0 0 2px rgba(65, 105, 225 / 20%);
-}
-
-.song-list {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
 }
 
 .loading {
@@ -87,6 +97,80 @@
   }
 }
 
+.song-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.song-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: #1e2875;
+  transition: background-color 0.2s ease;
+}
+
+.song-item:hover {
+  background-color: #2e3885;
+}
+
+.song-cover {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 0.375rem;
+  object-fit: cover;
+}
+
+.song-info {
+  flex: 1;
+  text-align: left;
+  min-width: 0;
+}
+
+.song-title {
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.song-artist {
+  font-size: 0.875rem;
+  color: #b4c6ff;
+  margin: 0.25rem 0 0;
+  line-height: 1.4;
+}
+
+.text-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.empty-favorites {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #b4c6ff;
+  background-color: #1e2875;
+  border-radius: 0.5rem;
+}
+
+.empty-favorites p {
+  margin: 0;
+}
+
+.empty-subtitle {
+  font-size: 0.875rem;
+  margin-top: 0.5rem !important;
+  opacity: 0.8;
+}
+
 @media (width <= 1232px) {
   .container {
     padding-left: 1rem;
@@ -99,9 +183,12 @@
     padding: 1rem 0.5rem;
   }
 
+  .header {
+    margin-bottom: 1.5rem;
+  }
+
   .title {
     font-size: 1.8rem;
-    margin-bottom: 1.5rem;
   }
 
   .search-container {
@@ -136,7 +223,12 @@
     font-size: 0.75rem;
   }
 
-  .button-group {
-    gap: 0.25rem;
+  .loading {
+    height: 12rem;
+  }
+
+  .spinner {
+    width: 1.5rem;
+    height: 1.5rem;
   }
 }

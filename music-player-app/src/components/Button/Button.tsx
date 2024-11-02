@@ -1,29 +1,21 @@
+import { forwardRef } from "react";
 import "./Button.css";
 
-interface ButtonProps {
-  children: React.ReactNode;
-  onClick?: () => void;
-  variant?: "primary" | "secondary";
-  disabled?: boolean;
+type ButtonProps = Omit<JSX.IntrinsicElements["button"], "className"> & {
   className?: string;
-}
+  variant?: "primary" | "secondary";
+};
 
-const Button = ({
-  children,
-  onClick,
-  variant = "primary",
-  disabled = false,
-  className = "",
-}: ButtonProps) => {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+  const { variant = "primary", children, className = "", ...rest } = props;
+
   return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      className={`button ${variant} ${className}`}
-    >
+    <button ref={ref} className={`button ${variant} ${className}`} {...rest}>
       {children}
     </button>
   );
-};
+});
+
+Button.displayName = "Button";
 
 export default Button;

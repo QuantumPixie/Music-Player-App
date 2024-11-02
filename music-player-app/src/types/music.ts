@@ -8,7 +8,7 @@ export interface Song {
 }
 
 export interface PlayerState {
-  currentSong: Song | null;
+  currentSong?: Song;
   isPlaying: boolean;
   volume: number;
   progress: number;

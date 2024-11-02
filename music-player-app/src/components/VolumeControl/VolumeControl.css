@@ -1,0 +1,129 @@
+.volume-control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.desktop-volume {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 120px;
+}
+
+.mobile-volume {
+  display: none;
+}
+
+.volume-button {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.volume-slider-popup {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: #1e2875;
+  border-radius: 0.5rem;
+  padding: 1rem 0.5rem;
+  width: 48px;
+  height: 150px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0 / 10%),
+    0 2px 4px -1px rgba(0, 0, 0 / 6%);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  z-index: 100;
+}
+
+.volume-slider-popup.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.volume-slider-wrapper {
+  height: 100%;
+  min-height: 120px;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.volume-slider-wrapper .slider {
+  writing-mode: vertical-lr;
+  direction: rtl;
+  width: 8px;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background: #2e3885;
+  border-radius: 4px;
+}
+
+.volume-slider-wrapper .slider::-webkit-slider-thumb {
+  margin-left: -3px;
+  margin-top: -7px;
+  width: 14px;
+  height: 14px;
+  background: #4169e1;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.volume-slider-wrapper .slider::-moz-range-thumb {
+  margin-left: -3px;
+  margin-top: -7px;
+  width: 14px;
+  height: 14px;
+  background: #4169e1;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}
+
+.volume-slider-wrapper .slider::-webkit-slider-runnable-track {
+  width: 8px;
+  background: #2e3885;
+  border-radius: 4px;
+}
+
+.volume-slider-wrapper .slider::-moz-range-track {
+  width: 8px;
+  background: #2e3885;
+  border-radius: 4px;
+}
+
+@media (width <= 768px) {
+  .desktop-volume {
+    display: none;
+  }
+
+  .mobile-volume {
+    display: block;
+    position: relative;
+  }
+}
+
+/* Touch device optimization */
+@media (hover: none) {
+  .volume-slider-wrapper .slider::-webkit-slider-thumb {
+    width: 20px;
+    height: 20px;
+  }
+
+  .volume-slider-wrapper .slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+  }
+}

@@ -1,25 +1,42 @@
+import { CSSProperties } from "react";
 import "./Slider.css";
 
 interface SliderProps {
-  value: number[];
-  onValueChange: (value: number[]) => void;
+  value: number;
+  onChange: (value: number) => void;
   max: number;
   step: number;
+  className?: string;
+  orientation?: "horizontal" | "vertical";
+  style?: CSSProperties;
+  "aria-label"?: string;
 }
 
-const Slider = ({ value, onValueChange, max, step }: SliderProps) => {
+const Slider = ({
+  value,
+  onChange,
+  max,
+  step,
+  className = "",
+  orientation = "horizontal",
+  style,
+  "aria-label": ariaLabel,
+  ...rest
+}: SliderProps) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(event.target.value);
     if (!isNaN(newValue)) {
-      onValueChange([newValue]);
+      onChange(newValue);
     }
   };
 
-  // always have a valid number value
-  const safeValue = !isNaN(value[0]) ? value[0] : 0;
+  const safeValue = !isNaN(value) ? value : 0;
 
   return (
-    <div className="slider-container">
+    <div
+      className={`slider-container ${orientation} ${className}`}
+      style={style}
+    >
       <input
         type="range"
         min="0"
@@ -27,7 +44,9 @@ const Slider = ({ value, onValueChange, max, step }: SliderProps) => {
         step={step}
         value={safeValue}
         onChange={handleChange}
-        className="slider"
+        className={`slider ${orientation}`}
+        aria-label={ariaLabel}
+        {...rest}
       />
     </div>
   );

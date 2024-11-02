@@ -1,8 +1,10 @@
-import { Song } from "../../types/music";
-import { usePlayerStore } from "../../store/usePlayerStore";
+import { useCallback } from "react";
+import { Song } from "@/types/music";
+import { usePlayerStore } from "@/store/usePlayerStore";
 import { Heart, Play, Pause } from "lucide-react";
 import Button from "../Button/Button";
 import { toast } from "sonner";
+import { MESSAGES } from "@/constants";
 import "./SongList.css";
 
 interface SongListProps {
@@ -19,23 +21,30 @@ export const SongList = ({ songs }: SongListProps) => {
     toggleFavorite,
   } = usePlayerStore();
 
-  const handlePlayPause = (song: Song) => {
-    if (currentSong?.id === song.id) {
-      setIsPlaying(!isPlaying);
-    } else {
-      setCurrentSong(song);
-      setIsPlaying(true);
-    }
-  };
+  const handlePlayPause = useCallback(
+    (song: Song) => {
+      if (currentSong?.id === song.id) {
+        setIsPlaying(!isPlaying);
+      } else {
+        setCurrentSong(song);
+        setIsPlaying(true);
+      }
+    },
+    [currentSong, isPlaying, setCurrentSong, setIsPlaying]
+  );
 
-  const handleFavoriteClick = (song: Song) => {
-    toggleFavorite(song.id);
-    toast.success(
-      isFavorite(song.id)
-        ? `Added ${song.title} to favorites`
-        : `Removed ${song.title} from favorites`
-    );
-  };
+  const handleFavoriteClick = useCallback(
+    (song: Song) => {
+      const wasInFavorites = isFavorite(song.id);
+      toggleFavorite(song.id);
+      toast.success(
+        wasInFavorites
+          ? MESSAGES.SUCCESS.REMOVED_FROM_FAVORITES(song.title)
+          : MESSAGES.SUCCESS.ADDED_TO_FAVORITES(song.title)
+      );
+    },
+    [toggleFavorite, isFavorite]
+  );
 
   return (
     <div className="song-list">
@@ -43,8 +52,8 @@ export const SongList = ({ songs }: SongListProps) => {
         <div key={song.id} className="song-item">
           <img src={song.coverUrl} alt={song.title} className="song-cover" />
           <div className="song-info">
-            <h3 className="song-title">{song.title}</h3>
-            <p className="song-artist">{song.artist}</p>
+            <h3 className="song-title text-truncate">{song.title}</h3>
+            <p className="song-artist text-truncate">{song.artist}</p>
           </div>
           <div className="button-group">
             <Button
@@ -53,6 +62,11 @@ export const SongList = ({ songs }: SongListProps) => {
               className={`favorite-button ${
                 isFavorite(song.id) ? "active" : ""
               }`}
+              aria-label={
+                isFavorite(song.id)
+                  ? "Remove from favorites"
+                  : "Add to favorites"
+              }
             >
               <Heart
                 className={`heart-icon ${
@@ -62,7 +76,13 @@ export const SongList = ({ songs }: SongListProps) => {
                 color={isFavorite(song.id) ? "#ff4081" : "currentColor"}
               />
             </Button>
-            <Button variant="secondary" onClick={() => handlePlayPause(song)}>
+            <Button
+              variant="secondary"
+              onClick={() => handlePlayPause(song)}
+              aria-label={
+                currentSong?.id === song.id && isPlaying ? "Pause" : "Play"
+              }
+            >
               {currentSong?.id === song.id && isPlaying ? (
                 <Pause className="h-5 w-5" />
               ) : (
