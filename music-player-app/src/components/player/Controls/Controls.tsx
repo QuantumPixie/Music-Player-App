@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import { usePlayerStore } from "@/store/usePlayerStore";
 import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
 import { useAudio } from "@/hooks/useAudio";
@@ -41,20 +40,17 @@ export const Controls = () => {
       (event.shiftKey ? skipForward(CONFIG.SKIP_SECONDS) : playNextSong()),
   });
 
-  const handleProgressClick = useCallback(
-    (event: React.MouseEvent<HTMLDivElement>) => {
-      if (!audioRef.current) return;
+  const handleProgressClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (!audioRef.current) return;
 
-      const { progress, time } = getProgressFromMouseEvent(
-        event,
-        audioRef.current.duration
-      );
+    const { progress, time } = getProgressFromMouseEvent(
+      event,
+      audioRef.current.duration
+    );
 
-      seekTo(time);
-      setProgress(progress);
-    },
-    [seekTo, setProgress, audioRef]
-  );
+    seekTo(time);
+    setProgress(progress);
+  };
 
   if (!currentSong) return null;
 
@@ -69,7 +65,7 @@ export const Controls = () => {
       <div className="progress-container" onClick={handleProgressClick}>
         <Slider
           value={isNaN(progress) ? 0 : progress}
-          onChange={(value) => setProgress(value)}
+          onChange={setProgress}
           max={100}
           step={0.1}
           aria-label="Progress"

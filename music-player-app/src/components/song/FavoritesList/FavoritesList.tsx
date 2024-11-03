@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { usePlayerStore } from "@/store/usePlayerStore";
 import { SongList } from "../SongList/SongList";
 import { Song } from "@/types/music";
@@ -10,10 +9,7 @@ interface FavoritesListProps {
 export const FavoritesList = ({ allSongs }: FavoritesListProps) => {
   const favorites = usePlayerStore((state) => state.favorites);
 
-  const favoriteSongs = useMemo(
-    () => allSongs.filter((song) => favorites.includes(song.id)),
-    [allSongs, favorites]
-  );
+  const favoriteSongs = allSongs.filter((song) => favorites.includes(song.id));
 
   if (favoriteSongs.length === 0) {
     return (
