@@ -55,28 +55,6 @@
   gap: 1rem;
 }
 
-.controls-icon {
-  width: 20px;
-  height: 20px;
-  color: #fff;
-}
-
-.volume-control {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  width: 120px;
-  position: relative;
-}
-
-.volume-button {
-  display: none;
-}
-
-.volume-slider-popup {
-  display: none;
-}
-
 .progress-container {
   position: absolute;
   bottom: 100%;
@@ -133,85 +111,6 @@
     width: 100%;
     justify-content: center;
     margin-top: 0.5rem;
-  }
-
-  .volume-control {
-    position: relative;
-    width: auto;
-  }
-
-  .volume-control .slider-container {
-    display: none;
-  }
-
-  .volume-button {
-    display: flex;
-    background: none;
-    border: none;
-    padding: 0.5rem;
-    color: #fff;
-    cursor: pointer;
-    margin-left: 0.5rem;
-    margin-top: 0.6rem;
-  }
-
-  .volume-slider-popup {
-    display: block;
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    background: #1e2875;
-    border-radius: 0.5rem;
-    padding: 1rem 0.5rem;
-    width: 48px;
-    height: 150px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0 / 10%),
-      0 2px 4px -1px rgba(0, 0, 0 / 6%);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.2s ease;
-  }
-
-  .volume-slider-popup.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
-  }
-
-  .volume-slider-wrapper {
-    height: 100%;
-    padding: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .volume-slider-popup .slider {
-    writing-mode: vertical-lr;
-    direction: rtl;
-    height: 100%;
-    width: 8px;
-    padding: 0;
-    margin: 0;
-  }
-
-  .volume-slider-popup .slider::-webkit-slider-thumb {
-    margin-left: -3px;
-    margin-top: -7px;
-  }
-
-  .volume-slider-popup .slider::-moz-range-thumb {
-    margin-left: -3px;
-    margin-top: -7px;
-  }
-
-  .volume-slider-popup .slider::-webkit-slider-runnable-track {
-    width: 8px;
-  }
-
-  .volume-slider-popup .slider::-moz-range-track {
-    width: 8px;
   }
 
   .progress-container {
