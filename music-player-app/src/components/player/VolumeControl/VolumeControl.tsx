@@ -1,42 +1,11 @@
-import { useState, useRef, useEffect } from "react";
 import { Volume2 } from "lucide-react";
 import Slider from "../../common/Slider/Slider";
+import { useVolumeControl } from "@/hooks/useVolumeControl";
 import "./VolumeControl.css";
 
-interface VolumeControlProps {
-  volume: number;
-  onVolumeChange: (value: number) => void;
-}
-
-export const VolumeControl = ({
-  volume,
-  onVolumeChange,
-}: VolumeControlProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const controlRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        controlRef.current &&
-        !controlRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen]);
-
-  const handleVolumeChange = (value: number) => {
-    onVolumeChange(value);
-  };
+export const VolumeControl = () => {
+  const { volume, isOpen, controlRef, setIsOpen, handleVolumeChange } =
+    useVolumeControl();
 
   return (
     <div className="volume-control" ref={controlRef}>

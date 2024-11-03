@@ -16,7 +16,6 @@ export const Controls = () => {
     volume,
     progress,
     setIsPlaying,
-    setVolume,
     setProgress,
     playNextSong,
     playPreviousSong,
@@ -55,13 +54,6 @@ export const Controls = () => {
       setProgress(progress);
     },
     [seekTo, setProgress, audioRef]
-  );
-
-  const handleVolumeChange = useCallback(
-    (value: number) => {
-      setVolume(value / 100);
-    },
-    [setVolume]
   );
 
   if (!currentSong) return null;
@@ -111,7 +103,7 @@ export const Controls = () => {
             onPrevious={playPreviousSong}
           />
         </div>
-        <VolumeControl volume={volume} onVolumeChange={handleVolumeChange} />
+        <VolumeControl />
       </div>
     </div>
   );
