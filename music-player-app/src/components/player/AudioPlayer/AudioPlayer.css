@@ -15,9 +15,11 @@
 
 .header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  gap: 1rem;
   margin-bottom: 2rem;
+  position: relative;
 }
 
 .title {
@@ -25,9 +27,13 @@
   font-weight: bold;
   color: #fff;
   margin: 0;
+  text-align: center;
 }
 
 .help-button {
+  position: absolute;
+  right: 0;
+  top: 0;
   color: #b4c6ff;
   transition: color 0.2s ease;
 }

@@ -49,10 +49,21 @@ export const SongList = ({ songs }: SongListProps) => {
   return (
     <div className="song-list">
       {songs.map((song) => (
-        <div key={song.id} className="song-item">
+        <div
+          key={song.id}
+          className={`song-item ${
+            currentSong?.id === song.id ? "playing" : ""
+          }`}
+        >
           <img src={song.coverUrl} alt={song.title} className="song-cover" />
           <div className="song-info">
-            <h3 className="song-title text-truncate">{song.title}</h3>
+            <h3
+              className={`song-title ${
+                currentSong?.id === song.id ? "playing" : ""
+              }`}
+            >
+              {song.title}
+            </h3>
             <p className="song-artist text-truncate">{song.artist}</p>
           </div>
           <div className="button-group">
