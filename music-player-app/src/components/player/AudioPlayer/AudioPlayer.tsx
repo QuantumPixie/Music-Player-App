@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { SongList } from "../SongList/SongList";
-import { FavoritesList } from "../FavoritesList/FavoritesList";
+import { SongList } from "../../song/SongList/SongList";
+import { FavoritesList } from "../../song/FavoritesList/FavoritesList";
 import { Controls } from "../Controls/Controls";
-import { HelpModal } from "../HelpModal/HelpModal";
-import { Tabs } from "../Tabs/Tabs";
+import { HelpModal } from "../../layout/HelpModal/HelpModal";
+import { Tabs } from "../../common/Tabs/Tabs";
 import { useSearch } from "@/hooks/useSearch";
 import { Song } from "@/types/music";
 import { toast } from "sonner";
 import { Search, HelpCircle, Library, Heart } from "lucide-react";
 import { MESSAGES } from "@/constants";
-import Button from "../Button/Button";
+import Button from "../../common/Button/Button";
 import "./AudioPlayer.css";
 
 const TABS = [

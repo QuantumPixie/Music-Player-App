@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { Play, Pause, SkipBack, SkipForward } from "lucide-react";
-import Button from "../Button/Button";
+import Button from "../../common/Button/Button";
 
 interface PlaybackControlsProps {
   isPlaying: boolean;

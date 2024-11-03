@@ -4,7 +4,7 @@ import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
 import { useAudio } from "@/hooks/useAudio";
 import { PlaybackControls } from "../PlaybackControls/PlaybackControls";
 import { VolumeControl } from "../VolumeControl/VolumeControl";
-import Slider from "../Slider/Slider";
+import Slider from "../../common/Slider/Slider";
 import { formatTime, getProgressFromMouseEvent } from "@/utils/time";
 import { CONFIG } from "@/constants";
 import "./Controls.css";

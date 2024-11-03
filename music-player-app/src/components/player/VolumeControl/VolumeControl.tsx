@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Volume2 } from "lucide-react";
-import Slider from "../Slider/Slider";
+import Slider from "../../common/Slider/Slider";
 import "./VolumeControl.css";
 
 interface VolumeControlProps {

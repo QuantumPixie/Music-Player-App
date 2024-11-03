@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { X, Keyboard } from "lucide-react";
-import Button from "../Button/Button";
+import Button from "../../common/Button/Button";
 import { CONFIG } from "@/constants";
 import "./HelpModal.css";
 

@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { Song } from "@/types/music";
 import { usePlayerStore } from "@/store/usePlayerStore";
 import { Heart, Play, Pause } from "lucide-react";
-import Button from "../Button/Button";
+import Button from "../../common/Button/Button";
 import { toast } from "sonner";
 import { MESSAGES } from "@/constants";
 import "./SongList.css";

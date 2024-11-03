@@ -1,5 +1,5 @@
 import { Toaster } from "sonner";
-import AudioPlayer from "./components/AudioPlayer/AudioPlayer";
+import AudioPlayer from "./components/player/AudioPlayer/AudioPlayer";
 import "./App.css";
 
 const App = () => {
