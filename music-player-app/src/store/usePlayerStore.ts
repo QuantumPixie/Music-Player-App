@@ -18,9 +18,11 @@ const getSongByIndex = async (currentId?: string) => {
   try {
     const response = await fetch("/songs.json");
     const songs: Song[] = await response.json();
+
     const currentIndex = currentId
-      ? songs.findIndex((s) => s.id === currentId)
+      ? songs.findIndex((song) => song.id === currentId)
       : -1;
+
     return (offset: number) => {
       if (currentIndex === -1) return songs[0];
       return songs[(currentIndex + offset + songs.length) % songs.length];
